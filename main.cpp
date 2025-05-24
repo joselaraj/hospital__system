@@ -34,7 +34,7 @@ void Menu() {
     cout << "==============================\n";
     cout << setw(5) << "1) " << "Register\n";
     cout << setw(5) << "2) " << "View Patient Information\n";
-    cout << "\nEnter your choice: ";
+    cout << "Enter your choice: ";
 }
 
 int main() {
@@ -50,7 +50,7 @@ int main() {
                 manager.addPatient();
                 break;
             case 2:
-                manager.savePatientsToFile("patients.txt");
+                manager.display();
                 break;
 
             default:

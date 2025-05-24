@@ -19,7 +19,7 @@ using namespace std;
 
 
 Patient::Patient() {
-    cout << " " << endl;
+    cout << "";
 }
 
 
@@ -205,6 +205,24 @@ int Patient::getAge() {
     int age = CURRENT_YEAR - year;
     return age;
 }
+
+
+
+void Patient::display() {
+    cout << "\n==============================\n";
+    cout << setw(25) << "Patient Information" << "\n";
+    cout << "==============================\n";
+    for (int i =0;i<patients.size();i++) {
+        cout << setw(5) << " Patient Name: " << patients[i].getName() << endl;
+        cout << setw(5) << " Patient Date of Birth: " << patients[i].getBirthDate() << endl;
+        cout << setw(5) << " Patient Age: " << patients[i].getAge() << endl;
+        cout << setw(5) << " Patient Gender: " << patients[i].getGender() << endl;
+        cout << setw(5) << " Patient FIN: " << patients[i].getFin() << endl;
+        cout << "==============================\n";
+    }
+
+}
+
 
 
 
