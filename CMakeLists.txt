@@ -6,5 +6,5 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(hospital_system main.cpp
         registration.cpp
         registration.h
-        patient_manager.cpp
-        patient_manager.h)
+        staff_manager.cpp
+        staff_manager.h)

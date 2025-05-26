@@ -19,7 +19,7 @@ using namespace std;
 
 
 Patient::Patient() {
-    cout << " " << endl;
+    cout << " ";
 }
 
 
@@ -133,23 +133,19 @@ void Patient::addPatient() {
 
 
 //display the patients info
-void Patient::savePatientsToFile(const std::string& filename)  {
-    std::ofstream db(filename, std::ios::app);
-    if (!db.is_open()) {
-        std::cerr << "Unable to open file\n";
-        return;
-    }
+void Patient::display() {
+    cout << "==============================\n";
+    cout << setw(25) << "Patient Information" << endl;
+    cout << "==============================\n";
 
-    for (const auto& patient : patients) {
-        db << Patient::getName() << "\n";
-        db << Patient::getGender() << "\n";
-        db << Patient::getBirthDate() << "\n";
-        db << Patient::getAge() << "\n";
-        db << Patient::getFin() << "\n";
-        db << "---\n"; // Separator between patients
+    for (int i = 0; i < patients.size(); i++) {
+        cout << "Name: " << patients[i].getName() << endl;
+        cout << "Gender: " << patients[i].getGender() << endl;
+        cout << "Date of Birth: " << patients[i].getBirthDate() << endl;
+        cout << "Age: " << patients[i].getAge() << endl;
+        cout << "FIN: " << patients[i].getFin() << endl;
+        cout << endl;
     }
-
-    db.close();
 }
 //                                      D E F I N E        G E T T E R S
 
