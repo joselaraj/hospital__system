@@ -7,8 +7,8 @@
 #include <string>
 using namespace std;
 
-const std::string admin_user = "josel";
-const std::string admin_pass = "<levi1009>";
+const std::string admin_user = "admin";
+const std::string admin_pass = "<PASSWORD>";
 
 Staff::Staff() {
     cout <<"";
