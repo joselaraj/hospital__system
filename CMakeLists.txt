@@ -7,4 +7,6 @@ add_executable(hospital_system main.cpp
         registration.cpp
         registration.h
         staff_manager.cpp
-        staff_manager.h)
+        staff_manager.h
+        room_logistics.cpp
+        room_logistics.h)

@@ -25,6 +25,8 @@ private:
  char gender;
  int month,day,year;
  long int fin;
+ string pt_loc;
+ string notes;
 
 public:
  vector<Patient> patients;
@@ -38,6 +40,8 @@ public:
  void setGender();
  void setBirthDate();
  void setFin();
+ void setLocation();
+ void setProviderNotes();
 
 
 
@@ -47,7 +51,8 @@ public:
  string getBirthDate();
  int getFin();
  int getAge();
-
+ string getLocation();
+string getProviderNotes();
 
  //utility
  void display();

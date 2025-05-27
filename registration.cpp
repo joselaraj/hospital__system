@@ -50,7 +50,7 @@ void Patient::setGender() {
 
 //set pts dob
 void Patient::setBirthDate() {
-   cout << "Month (1-12):";
+   cout << "Month:";
     cin >> month;
     cout << "Day:";
     cin >> day;
@@ -76,6 +76,19 @@ void Patient::setFin() {
     std::uniform_int_distribution<> dist(40000, 49999);
     fin = dist(gen);
 }
+
+//set the location to 0, which means waiting area
+void Patient::setLocation() {
+    cin.ignore();
+    cout << "Patient Location:";
+    getline(cin,pt_loc);
+}
+
+void Patient::setProviderNotes() {
+    cout << "Provider Notes:";
+    getline(cin,notes);
+}
+
 //                                       D E F I N E     S E T T E R S
 
 
@@ -83,7 +96,9 @@ void Patient::setFin() {
 //                                      D E F I N E        G E T T E R S
 
 
-
+string Patient::getProviderNotes() {
+    return notes;
+}
 
 //get the pts FIN
 int Patient::getFin() {
@@ -118,6 +133,9 @@ string Patient::getBirthDate() {
 }
 
 
+string Patient::getLocation() {
+    return pt_loc;
+}
 
 //add pt to vector
 void Patient::addPatient() {
@@ -127,6 +145,8 @@ void Patient::addPatient() {
     p.setGender();
     p.setBirthDate();
     p.getAge();
+    p.setLocation();
+    p.setProviderNotes();
     patients.push_back(p);
 }
 
@@ -134,6 +154,13 @@ void Patient::addPatient() {
 
 //display the patients info
 void Patient::display() {
+    //check if the vector is empty
+    if (patients.empty()) {
+        cout << "No patients registered.\n";
+        return;
+    }
+
+    // if the vector isnt empty, display the patients info by using for loop
     cout << "==============================\n";
     cout << setw(25) << "Patient Information" << endl;
     cout << "==============================\n";
@@ -144,9 +171,12 @@ void Patient::display() {
         cout << "Date of Birth: " << patients[i].getBirthDate() << endl;
         cout << "Age: " << patients[i].getAge() << endl;
         cout << "FIN: " << patients[i].getFin() << endl;
+        cout << "Location: " << patients[i].getLocation() << endl;
+        cout << "Provider Notes: " << patients[i].getProviderNotes() << endl;
         cout << endl;
     }
 }
+
 //                                      D E F I N E        G E T T E R S
 
 
