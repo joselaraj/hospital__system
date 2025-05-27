@@ -3,6 +3,8 @@
 #ifndef STAFF_MANAGER_H
 #define STAFF_MANAGER_H
 
+#include <vector>
+
 
 //              C R E A T E         C L A S S
 
