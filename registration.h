@@ -19,6 +19,9 @@ The patient will first register, the registration process will follow:
 4.)Add into the vector (we will use a DB later on when I learn how to connect it)
  */
 const int CURRENT_YEAR =2025;
+
+class Logistics; // Forward declaration
+
 class Patient {
 private:
  string name;
@@ -27,7 +30,8 @@ private:
  long int fin;
  string pt_loc;
  string notes;
-
+ int pt_loc_num; // this is so when anyone enters the ED number it sets it to an integer Example: ED 1 = 1, ED 16 =16, etc.
+ int rand_fin;
 public:
  vector<Patient> patients;
 //create the default constructor
@@ -39,9 +43,9 @@ public:
  void setName();
  void setGender();
  void setBirthDate();
- void setFin();
  void setLocation();
  void setProviderNotes();
+ void setFin();
 
 
 
@@ -53,10 +57,12 @@ public:
  int getAge();
  string getLocation();
 string getProviderNotes();
+ //want to make sure that there are not two people in the same room
+ bool isPatientInAnyRoom();
 
  //utility
- void display();
- void addPatient();
+ void display( Logistics& logistics);
+ void addPatient(Logistics &logistics);
  bool calendar_verification(int year,int month,int day);
  bool isLeapYear(int year);
  bool genderValid(char gender);

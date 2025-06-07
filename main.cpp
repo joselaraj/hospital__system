@@ -1,6 +1,7 @@
 #include <iostream>
 #include "registration.h"
 #include "staff_manager.h"
+#include "room_logistics.h"
 #include <iomanip>
 #include <string>
 using namespace std;
@@ -36,7 +37,8 @@ void Patient_Menu() {
     cout << setw(5) << "1) " << "Register\n";
     cout << setw(5) << "2) " << "View Patient Information\n";
     cout << setw(5) << "3) " << "Logout\n";
-    cout << setw(5) << "4) " << "Exit\n";
+    cout << setw(5) << "4) " << "View available rooms\n";
+    cout << setw(5) << "5) " << "Exit\n";
     cout << "\nEnter your choice: ";
 }
 
@@ -67,6 +69,7 @@ int main() {
     char runAgain;
     Patient manager;
     Staff admin;
+    Logistics logistics;
     std::string user_input;
     std::string pass_input;
 
@@ -115,16 +118,19 @@ int main() {
             cin >> user_choice;
             switch (user_choice) {
                 case 1:
-                    manager.addPatient();
+                    manager.addPatient(logistics);
                     break;
                 case 2:
-                    manager.display();
+                    manager.display(logistics);
                     break;
                 case 3:  // Add logout option
                     loggedIn = false;
                     cout << "Logged out successfully.\n";
                     break;
-                case 4:  // Add exit option
+                case 4:
+                    logistics.availableRooms();
+                    break;
+                case 5:  // Add exit option
                     cout << "Exiting program...\n";
                     return 0;
                 default:
@@ -136,7 +142,10 @@ int main() {
         cout << "Run again? (Y/N)";
         cin >> runAgain;
 
-    }while (runAgain == 'y');
+
+    }while (tolower(runAgain) == 'y');
+
+
 
 
     return 0;

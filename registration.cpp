@@ -3,7 +3,7 @@
 //
 
 #include "registration.h"
-
+#include "room_logistics.h"
 #include <fstream>
 #include <iostream>
 #include <random>
@@ -47,6 +47,13 @@ void Patient::setGender() {
     }
 }
 
+void Patient::setFin() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(40000, 49999);
+    rand_fin = dist(gen);
+    fin = rand_fin;
+}
 
 //set pts dob
 void Patient::setBirthDate() {
@@ -70,18 +77,26 @@ void Patient::setBirthDate() {
 
 
 //randomly generate a number as FIN
-void Patient::setFin() {
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_int_distribution<> dist(40000, 49999);
-    fin = dist(gen);
-}
+
 
 //set the location to 0, which means waiting area
 void Patient::setLocation() {
     cin.ignore();
     cout << "Patient Location:";
     getline(cin,pt_loc);
+
+    // Parse the input
+    std::istringstream iss(pt_loc);
+    std::string prefix;
+    int locationNum = 0;
+    iss >> prefix >> locationNum;
+    if (prefix == "ED" && locationNum >= 1 && locationNum <= 39) {
+        pt_loc_num = locationNum;
+
+    } else {
+        cout << "Invalid location. Please enter as 'ED <number>' with number between 1 and 39." << std::endl;
+        pt_loc_num = 0; // or handle as invalid
+    }
 }
 
 void Patient::setProviderNotes() {
@@ -100,11 +115,10 @@ string Patient::getProviderNotes() {
     return notes;
 }
 
-//get the pts FIN
 int Patient::getFin() {
+
     return fin;
 }
-
 
 //get the pts name
 string Patient::getName() {
@@ -138,22 +152,24 @@ string Patient::getLocation() {
 }
 
 //add pt to vector
-void Patient::addPatient() {
+void Patient::addPatient(Logistics &logistics) {
     Patient p;
     cin.ignore();
     p.setName();
     p.setGender();
     p.setBirthDate();
     p.getAge();
-    p.setLocation();
+    cin.ignore();
     p.setProviderNotes();
+    // Assign patient to a room by FIN
+    logistics.insertPatient(p.getFin());
     patients.push_back(p);
 }
 
 
 
 //display the patients info
-void Patient::display() {
+void Patient::display( Logistics& logistics) {
     //check if the vector is empty
     if (patients.empty()) {
         cout << "No patients registered.\n";
@@ -171,7 +187,7 @@ void Patient::display() {
         cout << "Date of Birth: " << patients[i].getBirthDate() << endl;
         cout << "Age: " << patients[i].getAge() << endl;
         cout << "FIN: " << patients[i].getFin() << endl;
-        cout << "Location: " << patients[i].getLocation() << endl;
+        cout << "Location: " << logistics.displayPatientRoom(patients[i].getFin()) <<endl;
         cout << "Provider Notes: " << patients[i].getProviderNotes() << endl;
         cout << endl;
     }
@@ -230,6 +246,11 @@ bool Patient::genderValid(char gender) {
 int Patient::getAge() {
     int age = CURRENT_YEAR - year;
     return age;
+}
+
+
+bool Patient::isPatientInAnyRoom() {
+
 }
 
 
